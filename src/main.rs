@@ -70,7 +70,7 @@ fn _adjust_color(color: Color) -> Color {
         Color {r: r@250...255, g: g@0...19, b: b@0...99} => Color {r, g, b: b/10},
         Color {r: r@250...255, g: g@0...19, b: b@100...127} => Color {r, g, b: b-10},
         Color {r: r@0...19, g, b} if b < g => Color {r: r, g, b: 200*b/255},
-        Color {r, g: g@0...19, b} if r < b => Color {r, g, b },
+        Color {r, g: g@0...19, b} if r < b => Color {r, g, b},
         Color {r, g, b} => Color {r, g: 180*g/255, b: 200*b/255},
     }
 }
@@ -78,7 +78,7 @@ fn _adjust_color(color: Color) -> Color {
 fn main() {
     let api = HidApi::new().expect("Failed to create API instance");
 
-    let kb = api.open(1165, 52736).expect("Failed to open device");
+    let kb = api.open(0x048D, 0xCE00).expect("Failed to open device");
 
     let disable_report = [
         0u8,
@@ -93,8 +93,6 @@ fn main() {
     ];
     kb.send_feature_report(&disable_report)
         .expect("Failed to send feature report");
-
-    // std::thread::sleep(std::time::Duration::from_secs(1));
 
     let brightness = 22u8;
     let refresh_report = [
