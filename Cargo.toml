@@ -1,0 +1,8 @@
+[package]
+name = "gk5cn6z_kb_poweroff"
+version = "0.1.0"
+authors = ["Mitchell Johnson <ehntoo@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+hidapi = "0.5.2"
