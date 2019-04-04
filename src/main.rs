@@ -9,6 +9,7 @@ pub enum FeatureReportOpcode {
     SetPicture = 0x12,
     SetColor = 0x14,
     SetRowIndex = 0x16,
+    GetFirmwareVersion = 0x80,
 }
 
 #[repr(u8)]
@@ -69,7 +70,7 @@ fn _adjust_color(color: Color) -> Color {
         Color {r: 138, g: 0, b: 255} => Color {r: 138, g: 0, b: 200},
         Color {r: r@250...255, g: g@0...19, b: b@0...99} => Color {r, g, b: b/10},
         Color {r: r@250...255, g: g@0...19, b: b@100...127} => Color {r, g, b: b-10},
-        Color {r: r@0...19, g, b} if b < g => Color {r: r, g, b: 200*b/255},
+        Color {r: r@0...19, g, b} if b < g => Color {r, g, b: 200*b/255},
         Color {r, g: g@0...19, b} if r < b => Color {r, g, b},
         Color {r, g, b} => Color {r, g: 180*g/255, b: 200*b/255},
     }
